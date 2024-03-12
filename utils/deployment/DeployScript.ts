@@ -169,6 +169,8 @@ export class DeployScript {
       11155111: "eth_sepolia",
       10: "opt_mainnet",
       11155420: "opt_sepolia",
+      34443: "mod_mainnet",
+      919: "mod_sepolia",
       31337: "hardhat",
       42161: "arb_mainnet",
       421613: "arb_sepolia",

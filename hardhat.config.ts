@@ -53,6 +53,14 @@ const config: HardhatUserConfig = {
     },
 
     // Arbitrum Public Chains
+    mod_mainnet: {
+      url: env.string("RPC_MODE_MAINNET", ""),
+    },
+    mod_sepolia: {
+      url: env.string("RPC_MODE_SEPOLIA", ""),
+    },
+
+    // Arbitrum Public Chains
     arb_mainnet: {
       url: env.string("RPC_ARB_MAINNET", ""),
     },
@@ -90,11 +98,12 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      mainnet: env.string("ETHERSCAN_API_KEY_ETH", ""),
-      sepolia: env.string("ETHERSCAN_API_KEY_ETH", ""),
+      mainnet: env.string("ETHERSCAN_API_KEY_ETH", "4QM9NUIQ4C5E8CMZ8XZAE85EZKS2SZU5WB"),
+      sepolia: env.string("ETHERSCAN_API_KEY_ETH", "4QM9NUIQ4C5E8CMZ8XZAE85EZKS2SZU5WB"),
       arbitrumOne: env.string("ETHERSCAN_API_KEY_ARB", ""),
       optimisticEthereum: env.string("ETHERSCAN_API_KEY_OPT", ""),
       "opt_sepolia": env.string("ETHERSCAN_API_KEY_OPT", ""),
+      "mod_sepolia": env.string("ETHERSCAN_API_KEY_MOD", "4QM9NUIQ4C5E8CMZ8XZAE85EZKS2SZU5WB")
     },
 
     customChains: [
@@ -104,7 +113,7 @@ const config: HardhatUserConfig = {
           urls: {
             apiURL: 'https://api-sepolia.etherscan.io/api',
             browserURL: 'https://sepolia.etherscan.io',
-          },
+          }
         },
         {
             network: 'opt_sepolia',
@@ -112,16 +121,25 @@ const config: HardhatUserConfig = {
             urls: {
               apiURL: 'https://api-sepolia-optimism.etherscan.io/api',
               browserURL: 'https://sepolia-optimism.etherscan.io',
-            },
-          },
-      ],
+            }
+        },
+        {
+            network: 'mod_sepolia',
+            chainId: 919,
+            urls: {
+              apiURL: 'https://sepolia.explorer.mode.network/api\?',
+              browserURL: 'https://sepolia.explorer.mode.network',
+            }
+        }
+    ]
   },
   typechain: {
     externalArtifacts: [
       "./interfaces/**/*.json",
       "./utils/optimism/artifacts/*.json",
       "./utils/arbitrum/artifacts/*.json",
-    ],
+      "./utils/mode/artifacts/*.json",
+    ]
   },
   mocha: {
     timeout: 20 * 60 * 60 * 1000, // 20 minutes for e2e tests
